@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCADE NEXUS - Modern Gaming Hub</title>
+    <!-- Google Fonts: Inter & Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES & RESET
+           ========================================================================== */
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: rgba(17, 24, 39, 0.7);
+            --bg-card-hover: rgba(31, 41, 55, 0.8);
+            --accent-purple: #8b5cf6;
+            --accent-indigo: #6366f1;
+            --accent-cyan: #06b6d4;
+            --accent-pink: #ec4899;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glow: rgba(139, 92, 246, 0.4);
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --radius-sm: 6px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 45%);
+            background-attachment: fixed;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+
+        /* Container Layout */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Dynamic Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        /* Gradient Text Helper */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 80px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            padding: 10px 16px 10px 40px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.9rem;
+            outline: none;
+            width: 220px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            width: 280px;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            fill: var(--text-muted);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION
+           ========================================================================== */
+        .hero-section {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 36px;
+        }
+
+        .hero-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.5);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+
+        .hero-cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(139, 92, 246, 0.7);
+        }
+
+        /* Stats Bar */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 750px;
+            margin: 60px auto 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .stat-item {
+            text-align: center;
+            border-right: 1px solid var(--border-glass);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           4. FEATURED BANNER
+           ========================================================================== */
+        .featured-section {
+            margin: 40px 0 60px;
+        }
+
+        .featured-banner {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.9), rgba(15, 23, 42, 0.95)),
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80') center/cover;
+            border: 1px solid var(--border-glow);
+            padding: 48px;
+            display: flex;
+            align-items: center;
+            min-height: 320px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .featured-content {
+            max-width: 550px;
+            z-index: 2;
+        }
+
+        .badge-featured {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.2);
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .featured-title {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .featured-desc {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           5. GAME SHOWCASE & FILTER SYSTEM
+           ========================================================================== */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        /* Filter Pills */
+        .filter-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-indigo);
+            color: white;
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Game Items Grid */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+            margin-bottom: 80px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(8px);
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-glow);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(139, 92, 246, 0.2);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .game-card:hover .card-img {
+            transform: scale(1.08);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(11, 15, 25, 0.75);
+            backdrop-filter: blur(6px);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+        }
+
+        .card-category {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-rating {
+            color: #f59e0b;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .play-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 1px solid var(--border-glass);
+            padding: 8px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .game-card:hover .play-btn {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+        }
+
+        /* Empty State */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        /* ==========================================================================
+           6. GAME PREVIEW MODAL LIGHTBOX
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--border-glass);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close-btn:hover {
+            background: var(--accent-pink);
+        }
+
+        .modal-header-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .modal-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .modal-tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .modal-desc {
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .launch-btn {
+            flex: 1;
+            background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple));
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .launch-btn:hover {
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           7. FOOTER
+           ========================================================================== */
+        footer {
+            border-top: 1px solid var(--border-glass);
+            background: rgba(7, 10, 17, 0.95);
+            padding: 60px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-desc {
+            color: var(--text-muted);
+            margin-top: 12px;
+            font-size: 0.9rem;
+            max-width: 320px;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-glass);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           8. RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .stat-item {
+                border-right: none;
+                border-bottom: 1px solid var(--border-glass);
+                padding-bottom: 16px;
+            }
+            .stat-item:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .search-box {
+                display: none;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .featured-banner {
+                padding: 24px;
+            }
+            .featured-title {
+                font-size: 1.6rem;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand-logo">
+                <div class="brand-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="6 11 10 7 14 11 18 7 18 17 6 17 6 11"></polygon>
+                        <line x1="4" y1="21" x2="20" y2="21"></line>
+                    </svg>
+                </div>
+                ARCADE<span class="text-gradient">NEXUS</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link active">Home</a></li>
+                <li><a href="#games" class="nav-link">Browse Games</a></li>
+                <li><a href="#featured" class="nav-link">Featured</a></li>
+                <li><a href="#" class="nav-link">Categories</a></li>
+            </ul>
+
+            <div class="search-box">
+                <svg class="search-icon" viewBox="0 0 24 24">
+                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                </svg>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search games...">
+            </div>
+
+            <button class="mobile-toggle" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+        
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <h1 class="hero-title">NEXT-GEN <span class="text-gradient">BROWSER GAMING</span></h1>
+            <p class="hero-subtitle">Dive into handpicked retro classics, intense sci-fi battles, and brain-bending puzzle experiences directly in your browser.</p>
+            <a href="#games" class="hero-cta-btn">
+                <span>Explore Catalog</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+
+            <!-- Dynamic Stats Bar -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="120">0</div>
+                    <div class="stat-label">Playable Titles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="45000">0</div>
+                    <div class="stat-label">Active Players</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="4.9">0</div>
+                    <div class="stat-label">Avg Rating</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURED BANNER SECTION -->
+        <section class="featured-section" id="featured">
+            <div class="featured-banner">
+                <div class="featured-content">
+                    <span class="badge-featured">Game of the Week</span>
+                    <h2 class="featured-title">Cybernetic Odyssey 2088</h2>
+                    <p class="featured-desc">Traverse through neon-lit futuristic metropolis alleyways in this high-octane action platformer experience.</p>
+                    <button class="hero-cta-btn" onclick="openGameModal(0)">
+                        <span>Play Now</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAMES SHOWCASE SECTION -->
+        <section id="games" style="scroll-margin-top: 100px;">
+            <div class="section-header">
+                <h2 class="section-title">Explore <span class="text-gradient">Games</span></h2>
+                
+                <!-- Category Filter Pills -->
+                <div class="filter-container" id="filterContainer">
+                    <button class="filter-btn active" data-category="all">All Games</button>
+                    <button class="filter-btn" data-category="action">Action</button>
+                    <button class="filter-btn" data-category="arcade">Arcade</button>
+                    <button class="filter-btn" data-category="puzzle">Puzzle</button>
+                    <button class="filter-btn" data-category="adventure">Adventure</button>
+                    <button class="filter-btn" data-category="sci-fi">Sci-Fi</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Game Cards Grid -->
+            <div class="games-grid" id="gamesGrid">
+                <!-- Javascript will dynamically generate item boxes here -->
+            </div>
+
+            <!-- No Results Placeholder -->
+            <div class="no-results" id="noResults">
+                <h3>No games found matching your search.</h3>
+                <p>Try searching for another title or clear your category filter.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- DYNAMIC GAME PREVIEW MODAL LIGHTBOX -->
+    <div class="modal-overlay" id="gameModal">
+        <div class="modal-card">
+            <button class="modal-close-btn" onclick="closeGameModal()" aria-label="Close modal">✕</button>
+            <img src="" alt="Game Preview" class="modal-header-img" id="modalImg">
+            <div class="modal-body">
+                <h3 class="modal-title" id="modalTitle">Game Title</h3>
+                <div class="modal-tags">
+                    <span class="modal-tag" id="modalCategory">Category</span>
+                    <span class="modal-tag" id="modalRating">★ 5.0</span>
+                    <span class="modal-tag" id="modalDifficulty">Normal</span>
+                </div>
+                <p class="modal-desc" id="modalDesc">Game description will load dynamically here.</p>
+                <div class="modal-actions">
+                    <a href="#" target="_blank" class="launch-btn" id="modalLaunchBtn" onclick="launchGame()">Launch Fullscreen Game Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="brand-logo" style="margin-bottom: 12px;">
+                        <div class="brand-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="6 11 10 7 14 11 18 7 18 17 6 17 6 11"></polygon></svg>
+                        </div>
+                        ARCADE<span class="text-gradient">NEXUS</span>
+                    </a>
+                    <p class="footer-desc">Your premium destination for instantly playable browser titles. Built for gamers everywhere.</p>
+                </div>
+                <div>
+                    <h4 class="footer-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#games">Browse Games</a></li>
+                        <li><a href="#featured">Featured Titles</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Categories</h4>
+                    <ul class="footer-links">
+                        <li><a href="#games">Action & Reflex</a></li>
+                        <li><a href="#games">Retro Arcade</a></li>
+                        <li><a href="#games">Mind Puzzles</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ARCADE NEXUS Hub. All rights reserved. Crafted for visual excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // ==========================================
+        // 1. GAME DATA ARRAY
+        // ==========================================
+        const gamesData = [
+            {
+                id: 0,
+                title: "snakeX: Cyber Runner",
+                category: "sci-fi",
+                badge: "Trending",
+                rating: "4.9",
+                difficulty: "Hard",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80",
+                description: "Traverse futuristic neon metropolis towers while fighting rogue artificial intelligence units in this high-tempo sci-fi platformer.",
+                url: "game/snake.html"
+            },
+            {
+                id: 1,
+                title: "tree climber: canopy quest",
+                category: "adventure",
+                badge: "Retro",
+                rating: "4.7",
+                difficulty: "Medium",
+                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80",
+                description: "Explore procedurally generated pixelated underground caverns, unearth rare equipment, and battle mythical creatures.",
+                url: "game/TreeClimber.html"            
+            },
+            {
+                id: 2,
+                title: "space hip play",
+                category: "action",
+                badge: "Popular",
+                rating: "4.8",
+                difficulty: "Easy",
+                image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80",
+                description: "Hit extreme speeds down synthwave highways, dodge traffic obstacles, and customize your glowing sports cars.",
+                url: "game/spaceshipplay.html"
+            },
+            {
+                id: 3,
+                title: "Quantum Maze Master",
+                category: "puzzle",
+                badge: "Brainer",
+                rating: "4.6",
+                difficulty: "Hard",
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+                description: "Shift dimension portals and bend light beams in over 100 challenging quantum logic puzzles."
+            },
+            {
+                id: 4,
+                title: "Galactic Invaders HD",
+                category: "arcade",
+                badge: "Classic",
+                rating: "4.5",
+                difficulty: "Medium",
+                image: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80",
+                description: "Defend sector Earth from relentless alien starships wave after wave in this modernized arcade shooter legend."
+            },
+            {
+                id: 5,
+                title: "Shadow Blade Samurai",
+                category: "action",
+                badge: "Hot",
+                rating: "4.9",
+                difficulty: "Expert",
+                image: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=600&q=80",
+                description: "Master precise sword combat, stealth tactics, and lightning quick reflexes in ancient feudal Japan."
+            }
+        ];
+
+        // ==========================================
+        // 2. DOM INITIALIZATION & RENDERING
+        // ==========================================
+        const gamesGrid = document.getElementById('gamesGrid');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        // Function to render game items grid
+        function renderGames(items) {
+            gamesGrid.innerHTML = '';
+            
+            if (items.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            } else {
+                noResults.style.display = 'none';
+            }
+
+            items.forEach(game => {
+                const card = document.createElement('div');
+                card.className = 'game-card';
+                card.setAttribute('data-category', game.category);
+
+                card.innerHTML = `
+                    <div class="card-img-wrapper">
+                        <img src="${game.image}" alt="${game.title}" class="card-img" loading="lazy">
+                        <span class="card-badge">${game.badge}</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="card-category">${game.category}</span>
+                            <span class="card-rating">★ ${game.rating}</span>
+                        </div>
+                        <h3 class="card-title">${game.title}</h3>
+                        <div class="card-footer">
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">${game.difficulty}</span>
+                            <button class="play-btn" onclick="openGameModal(${game.id})">
+                                <span>Play Box</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                gamesGrid.appendChild(card);
+            });
+        }
+
+        // Initial Render
+        renderGames(gamesData);
+
+        // ==========================================
+        // 3. FILTER & SEARCH CONTROLLER
+        // ==========================================
+        let currentCategory = 'all';
+
+        // Filter Pills Handler
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCategory = btn.getAttribute('data-category');
+                filterAndSearch();
+            });
+        });
+
+        // Search Input Handler
+        searchInput.addEventListener('input', () => {
+            filterAndSearch();
+        });
+
+        // Unified Filter Logic
+        function filterAndSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+
+            const filtered = gamesData.filter(game => {
+                const matchesCategory = (currentCategory === 'all' || game.category === currentCategory);
+                const matchesSearch = game.title.toLowerCase().includes(searchTerm) || 
+                                      game.category.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+
+            renderGames(filtered);
+        }
+
+        // ==========================================
+        // 4. MODAL DIALOG PREVIEW CONTROLLER
+        // ==========================================
+        const modalOverlay = document.getElementById('gameModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalRating = document.getElementById('modalRating');
+        const modalDifficulty = document.getElementById('modalDifficulty');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalLaunchBtn = document.getElementById('modalLaunchBtn');
+
+        function openGameModal(id) {
+            const game = gamesData.find(g => g.id === id);
+            if (!game) return;
+
+            modalImg.src = game.image;
+            modalTitle.textContent = game.title;
+            modalCategory.textContent = game.category.toUpperCase();
+            modalRating.textContent = `★ ${game.rating}`;
+            modalDifficulty.textContent = `Difficulty: ${game.difficulty}`;
+            modalDesc.textContent = game.description;
+            modalLaunchBtn.href = game.url || '#';
+
+            modalOverlay.classList.add('active');
+        }
+
+        function closeGameModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        // Close when clicking outside of card
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeGameModal();
+        });
+
+        function launchGame() {
+            //alert("Redirecting to dedicated game environment...");
+            closeGameModal();
+        }
+
+        // ==========================================
+        // 5. ANIMATED STATISTICAL COUNTER
+        // ==========================================
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const isFloat = target % 1 !== 0;
+                const duration = 1500;
+                const stepTime = 20;
+                const steps = duration / stepTime;
+                const increment = target / steps;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = isFloat ? target.toFixed(1) : Math.floor(target).toLocaleString() + "+";
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = isFloat ? current.toFixed(1) : Math.floor(current).toLocaleString();
+                    }
+                }, stepTime);
+            });
+        }
+
+        // Trigger stats animation on load
+        window.addEventListener('DOMContentLoaded', animateCounters);
+    </script>
+</body>
+</html>
